@@ -57,10 +57,10 @@ def _get_addon_name(full_name):
 
 
 class ComponentDatabases(dict):
-    """ Holds a registry of components for each database """
+    """Holds a registry of components for each database"""
 
 
-class ComponentRegistry(object):
+class ComponentRegistry:
     """Store all the components and allow to find them using criteria
 
     The key is the ``_name`` of the components.
@@ -169,7 +169,7 @@ class ComponentRegistry(object):
 _component_databases = ComponentDatabases()
 
 
-class WorkContext(object):
+class WorkContext:
     """Transport the context required to work with components
 
     It is propagated through all the components, so any
@@ -518,7 +518,7 @@ class MetaComponent(type):
         return cls._apply_on
 
 
-class AbstractComponent(object, metaclass=MetaComponent):
+class AbstractComponent(metaclass=MetaComponent):
     """Main Component Model
 
     All components have a Python inheritance either on
@@ -718,17 +718,17 @@ class AbstractComponent(object, metaclass=MetaComponent):
 
     @property
     def collection(self):
-        """ Collection we are working with """
+        """Collection we are working with"""
         return self.work.collection
 
     @property
     def env(self):
-        """ Current Odoo environment, the one of the collection record """
+        """Current Odoo environment, the one of the collection record"""
         return self.work.env
 
     @property
     def model(self):
-        """ The model instance we are working with """
+        """The model instance we are working with"""
         return self.work.model
 
     def component_by_name(self, name, model_name=None):
@@ -889,7 +889,7 @@ class AbstractComponent(object, metaclass=MetaComponent):
 
     @classmethod
     def _build_component_check_base(cls, extend_cls):
-        """ Check whether ``cls`` can be extended with ``extend_cls``. """
+        """Check whether ``cls`` can be extended with ``extend_cls``."""
         if cls._abstract and not extend_cls._abstract:
             msg = (
                 "%s transforms the abstract component %r into a "
